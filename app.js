@@ -42,6 +42,58 @@ app.post('/eliminar-hotel', async (req, res) => {
     }
 });
 
+app.get('/nuevo-hotel', (req, res) => {
+    res.render('nuevoHotel');
+});
+
+// Ruta para cargar los datos de un hotel en el formulario de edición
+app.get('/editar-hotel/:hotelId', async (req, res) => {
+    try {
+        const hotelId = req.params.hotelId;
+        const hotel = await Hotel.findById(hotelId); // Busca el hotel por su ID en MongoDB
+
+        if (!hotel) {
+            return res.status(404).send('Hotel no encontrado');
+        }
+
+        // Renderiza la vista 'editarHotel' y pasa los datos del hotel como contexto
+        res.render('editarHotel', { hotel: hotel });
+    } catch (error) {
+        console.error('Error al cargar hotel para editar:', error);
+        res.status(500).send('Ocurrió un error al cargar el hotel para editar.');
+    }
+});
+
+// Ruta para actualizar un hotel
+app.post('/actualizar-hotel', async (req, res) => {
+    try {
+        const { hotelId, name, address, rating, price } = req.body;
+
+        // Validar que se proporcionó el ID del hotel
+        if (!hotelId) {
+            return res.status(400).send('ID del hotel no proporcionado');
+        }
+
+        // Buscar el hotel por su ID y actualizar los campos
+        const updatedHotel = await Hotel.findByIdAndUpdate(hotelId, {
+            name,
+            address,
+            rating: parseInt(rating),
+            price: parseFloat(price)
+        }, { new: true }); // Usar { new: true } para obtener el hotel actualizado
+
+        if (!updatedHotel) {
+            return res.status(404).send('Hotel no encontrado');
+        }
+
+        // Redireccionar a la lista de hoteles después de la actualización
+        res.redirect('/hoteles');
+    } catch (error) {
+        console.error('Error al actualizar hotel:', error);
+        res.status(500).send('Ocurrió un error al actualizar el hotel.');
+    }
+});
+
 app.get('/', (req, res) => {
     res.render('index');
 });

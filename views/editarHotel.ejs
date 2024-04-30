@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turismo Perú</title>
+  <link rel="shortcut icon" type="image/png" href="/images/logos/favicon.png" />
+  <link rel="stylesheet" href="/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="/" class="text-nowrap logo-img">
+            <img src="/images/logos/logo.svg" alt="" />
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+              <span class="hide-menu">Inicio</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/tours" aria-expanded="false">
+                <iconify-icon icon="solar:map-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Tours</span>
+              </a>
+            </li>
+            <li>
+              <span class="sidebar-divider lg"></span>
+            </li>
+            <li class="nav-small-cap">
+              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+              <span class="hide-menu">MENU</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/hoteles" aria-expanded="false">
+                <iconify-icon icon="solar:buildings-3-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Hoteles</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/clientes" aria-expanded="false">
+                <iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Clientes</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/vuelos" aria-expanded="false">
+                <iconify-icon icon="solar:rocket-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Vuelos</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/reservas" aria-expanded="false">
+                <iconify-icon icon="solar:calendar-mark-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Reservas</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/boletos" aria-expanded="false">
+                <iconify-icon icon="solar:ticket-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Boletos</span>
+              </a>
+            </li>
+          </ul>
+
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <a href="/" target="_blank" class="btn btn-primary">Bienvenidx</a>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Nuevo Hotel</h5>
+              <p class="mb-0">Agrega un nuevo hotel al sistema</p>
+              <br>
+              <form action="/actualizar-hotel" method="POST">
+                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
+                
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nombre del Hotel:</label>
+                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Dirección:</label>
+                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating:</label>
+                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio:</label>
+                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <script src="/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/sidebarmenu.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/libs/simplebar/dist/simplebar.js"></script>
+  <!-- solar icons -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>
