@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turismo Perú</title>
+  <link rel="shortcut icon" type="image/png" href="/images/logos/favicon.png" />
+  <link rel="stylesheet" href="/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="/" class="text-nowrap logo-img">
+            <img src="/images/logos/logo.svg" alt="" />
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">
+              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+              <span class="hide-menu">Inicio</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/tours" aria-expanded="false">
+                <iconify-icon icon="solar:map-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Tours</span>
+              </a>
+            </li>
+            <li>
+              <span class="sidebar-divider lg"></span>
+            </li>
+            <li class="nav-small-cap">
+              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
+              <span class="hide-menu">MENU</span>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/hoteles" aria-expanded="false">
+                <iconify-icon icon="solar:buildings-3-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Hoteles</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/clientes" aria-expanded="false">
+                <iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Clientes</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/vuelos" aria-expanded="false">
+                <iconify-icon icon="solar:rocket-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Vuelos</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/reservas" aria-expanded="false">
+                <iconify-icon icon="solar:calendar-mark-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Reservas</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/boletos" aria-expanded="false">
+                <iconify-icon icon="solar:ticket-bold-duotone"></iconify-icon>
+                <span class="hide-menu">Boletos</span>
+              </a>
+            </li>
+          </ul>
+
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header">
+        <nav class="navbar navbar-expand-lg navbar-light">
+
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <a href="/" target="_blank" class="btn btn-primary">Bienvenidx</a>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-semibold mb-4">Clientes</h5>
+              <p class="mb-0">Clientes disponibles</p>
+              <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                  <a href="/nuevo-cliente" class="btn btn-success">Nuevo Cliente</a>
+                </ul>
+              </div>
+
+              <!doctype html>
+              <html lang="en">
+              
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Turismo Perú</title>
+                <link rel="shortcut icon" type="image/png" href="/images/logos/favicon.png" />
+                <link rel="stylesheet" href="/css/styles.min.css" />
+              </head>
+              
+              <body>
+                <!--  Body Wrapper -->
+                <!-- Tu código HTML para la estructura de la página -->
+                <div class="table-responsive" data-simplebar>
+                  <table class="table text-nowrap align-middle table-custom mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-dark fw-normal ps-0">DNI</th>
+                        <th scope="col" class="text-dark fw-normal">Nombre Completo</th>
+                        <th scope="col" class="text-dark fw-normal">Tarjeta de Crédito</th>
+                        <th scope="col" class="text-dark fw-normal">Número de Teléfono</th>
+                        <th scope="col" class="text-dark fw-normal">Acciones</th>>
+
+                        <!-- Añade más encabezados si es necesario -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% customers.forEach(customer => { %>
+                      <tr>
+                        <td><%= customer.dni %></td>
+                        <td><%= customer.full_name %></td>
+                        <td><%= customer.credit_card %></td>
+                        <td><%= customer.phone_number %></td>
+                        <td>
+                            <form action="/eliminar-cliente" method="POST" class="d-inline">
+                              <input type="hidden" name="customerId" value="<%= customer._id %>">
+                              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                            <form action="/editar-cliente/<%= customer._id %>" method="GET" class="d-inline">
+                              <button type="submit" class="btn btn-warning btn-sm">Editar</button>
+                            </form>
+                          </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Fin de la tabla -->
+                
+                <!-- Scripts -->
+                <script src="/libs/jquery/dist/jquery.min.js"></script>
+                <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="/js/sidebarmenu.js"></script>
+                <script src="/js/app.min.js"></script>
+                <script src="/libs/simplebar/dist/simplebar.js"></script>
+                <!-- solar icons -->
+                <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+              </body>
+              
+              </html>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <script src="/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/sidebarmenu.js"></script>
+  <script src="/js/app.min.js"></script>
+  <script src="/libs/simplebar/dist/simplebar.js"></script>
+  <!-- solar icons -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>
