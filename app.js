@@ -25,6 +25,106 @@ mongoose.connect('mongodb://0.0.0.0:27017/Hoteleria', {
     console.error('MongoDB connection error:', error);
 });
 
+// Ruta  de usuario
+app.post('/crear-cliente', async (req, res) => {
+    try {
+        const { dni, full_name, credit_card, phone_number } = req.body;
+        const newCustomer = new Customer({
+            dni,
+            full_name,
+            credit_card,
+            phone_number
+        });
+        await newCustomer.save();
+        res.redirect('/clientes');
+    } catch (error) {
+        console.error('Error creando cliente:', error);
+        res.status(500).send('Ocurrió un error al crear el cliente.');
+    }
+});
+
+app.get('/clientes', async (req, res) => {
+    try {
+        const customers = await Customer.find(); // Obtiene todos los clientes de la base de datos
+        res.render('clientes', { customers: customers }); // Renderiza la vista 'clientes' con la lista de clientes
+    } catch (error) {
+        console.error('Error al obtener clientes:', error);
+        res.status(500).send('Ocurrió un error al obtener los clientes.');
+    }
+});
+
+
+// Ruta para cargar los datos de un cliente en el formulario de edición
+app.get('/editar-cliente/:customerId', async (req, res) => {
+    try {
+        const customerId = req.params.customerId;
+        const customer = await Customer.findById(customerId); // Busca el cliente por su ID en MongoDB
+
+        if (!customer) {
+            return res.status(404).send('Cliente no encontrado');
+        }
+
+        // Renderiza la vista 'editarCliente' y pasa los datos del cliente como contexto
+        res.render('clienteEditar', { customer: customer });
+    } catch (error) {
+        console.error('Error al cargar cliente para editar:', error);
+        res.status(500).send('Ocurrió un error al cargar el cliente para editar.');
+    }
+});
+
+// Ruta para actualizar un cliente
+app.post('/actualizar-cliente', async (req, res) => {
+    try {
+        const { customerId, dni, full_name, credit_card, phone_number } = req.body;
+
+        // Validar que se proporcionó el ID del cliente
+        if (!customerId) {
+            return res.status(400).send('ID del cliente no proporcionado');
+        }
+
+        // Buscar el cliente por su ID y actualizar los campos
+        const updatedCustomer = await Customer.findByIdAndUpdate(customerId, {
+            dni,
+            full_name,
+            credit_card,
+            phone_number
+        }, { new: true }); // Usar { new: true } para obtener el cliente actualizado
+
+        if (!updatedCustomer) {
+            return res.status(404).send('Cliente no encontrado');
+        }
+
+        // Redireccionar a la lista de clientes después de la actualización
+        res.redirect('/clientes');
+    } catch (error) {
+        console.error('Error al actualizar cliente:', error);
+        res.status(500).send('Ocurrió un error al actualizar el cliente.');
+    }
+});
+
+// Ruta para eliminar un cliente
+app.post('/eliminar-cliente', async (req, res) => {
+    try {
+        const customerId = req.body.customerId;
+        await Customer.findByIdAndDelete(customerId); // Utilizando findByIdAndDelete() para eliminar el cliente
+        res.redirect('/clientes');
+    } catch (error) {
+        console.error('Error al eliminar cliente:', error);
+        res.status(500).send('Ocurrió un error al eliminar el cliente.');
+    }
+});
+
+
+
+app.get('/clientes', (req, res) => {
+    res.render('clientes');
+  });
+
+app.get('/nuevo-cliente', (req, res) => {
+    res.render('nuevoUser');
+});
+
+
 // Ruta para mostrar la lista de hoteles
 app.get('/hoteles', async (req, res) => {
     try {
