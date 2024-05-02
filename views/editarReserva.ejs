@@ -101,31 +101,74 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Editar Hotel</h5>
-              <p class="mb-0">Actualiza la información del hotel en el sistema</p>
+              <h5 class="card-title fw-semibold mb-4">Editar reserva</h5>
+              <p class="mb-0">Edición de la reserva en el sistema</p>
               <br>
-              <form action="/actualizar-hotel" method="POST">
-                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
-                
+            
+
+              <form action="/actualizar-reserva" method="POST">
                 <div class="mb-3">
-                  <label for="name" class="form-label">Nombre del Hotel:</label>
-                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
+                    <label for="tourId" class="form-label">Tour:</label>
+                    <select class="form-select" id="tourId" name="tourId" required>
+                        <option value="" disabled>-- Seleccione tour --</option> <!-- Opción predeterminada -->
+                        <% tours.forEach(tour => { %>
+                            <% if (tour._id.toString() === reservation.tour._id.toString()) { %>
+                                <option value="<%= tour._id %>" selected><%= tour.id %></option>
+                            <% } else { %>
+                                <option value="<%= tour._id %>"><%= tour.id %></option>
+                            <% } %>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="address" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
+                    <label for="customerId" class="form-label">Cliente (DNI):</label>
+                    <select class="form-select" id="customerId" name="customerId" required>
+                        <option value="" disabled>-- Seleccione cliente --</option> <!-- Opción predeterminada -->
+                        <% customers.forEach(customer => { %>
+                            <% if (customer._id.toString() === reservation.customer._id.toString()) { %>
+                                <option value="<%= customer._id %>" selected><%= customer.dni %> - <%= customer.full_name %></option>
+                            <% } else { %>
+                                <option value="<%= customer._id %>"><%= customer.dni %> - <%= customer.full_name %></option>
+                            <% } %>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="rating" class="form-label">Rating:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
+                    <label for="hotelId" class="form-label">Hotel:</label>
+                    <select class="form-select" id="hotelId" name="hotelId" required>
+                        <option value="" disabled>-- Seleccione hotel --</option> <!-- Opción predeterminada -->
+                        <% hotels.forEach(hotel => { %>
+                            <% if (hotel._id.toString() === reservation.hotel._id.toString()) { %>
+                                <option value="<%= hotel._id %>" selected><%= hotel.name %></option>
+                            <% } else { %>
+                                <option value="<%= hotel._id %>"><%= hotel.name %></option>
+                            <% } %>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Precio:</label>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
+                    <input type="number" class="form-control" id="price" name="price" value="<%= reservation.price %>" required>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-              </form>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="dateStart" class="form-label">Fecha de Inicio:</label>
+                        <input type="date" class="form-control" id="dateStart" name="dateStart" value="<%= reservation.date_start.toISOString().split('T')[0] %>" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="dateEnd" class="form-label">Fecha de Fin:</label>
+                        <input type="date" class="form-control" id="dateEnd" name="dateEnd" value="<%= reservation.date_end ? reservation.date_end.toISOString().split('T')[0] : '' %>">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="datePurchase" class="form-label">Fecha de Compra:</label>
+                        <input type="date" class="form-control" id="dateReservation" name="dateReservation" value="<%= reservation.date_reservation.toISOString().split('T')[0] %>" required>
+                    </div>
+                </div>
+                <input type="hidden" name="reservationId" value="<%= reservation._id %>">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+            
+            
 
             </div>
           </div>

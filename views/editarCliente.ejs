@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -96,42 +97,40 @@
           </div>
         </nav>
       </header>
-      <!--  Header End -->
+      <!-- Header End -->
       <div class="body-wrapper-inner">
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Editar Hotel</h5>
-              <p class="mb-0">Actualiza la información del hotel en el sistema</p>
+              <h5 class="card-title fw-semibold mb-4">Editar Cliente</h5>
+              <p class="mb-0">Actualiza la información del cliente</p>
               <br>
-              <form action="/actualizar-hotel" method="POST">
-                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
-                
+              <form action="/actualizar-cliente" method="POST">
+                <input type="hidden" name="customerId" value="<%= customer._id %>">
                 <div class="mb-3">
-                  <label for="name" class="form-label">Nombre del Hotel:</label>
-                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
+                    <label for="dni" class="form-label">DNI:</label>
+                    <input type="text" class="form-control" id="dni" name="dni" maxlength="8" value="<%= customer.dni %>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="address" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
+                    <label for="full_name" class="form-label">Nombre completo:</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" maxlength="50" value="<%= customer.full_name %>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="rating" class="form-label">Rating:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
+                    <label for="credit_card" class="form-label">Tarjeta de crédito:</label>
+                    <input type="text" class="form-control" id="credit_card" name="credit_card" maxlength="16" value="<%= customer.credit_card %>" required>
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Precio:</label>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
+                    <label for="phone_number" class="form-label">Número de teléfono:</label>
+                    <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="15" value="<%= customer.phone_number %>" required>
                 </div>
-
                 <button type="submit" class="btn btn-primary">Actualizar</button>
-              </form>
-
+            </form>            
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
   </div>

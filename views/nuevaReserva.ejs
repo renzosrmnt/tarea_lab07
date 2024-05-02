@@ -101,31 +101,56 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Editar Hotel</h5>
-              <p class="mb-0">Actualiza la información del hotel en el sistema</p>
+              <h5 class="card-title fw-semibold mb-4">Nueva Reserva</h5>
+              <p class="mb-0">Agrega una nueva reserva al sistema</p>
               <br>
-              <form action="/actualizar-hotel" method="POST">
-                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
-                
+              <form action="/crear-reserva" method="POST">
                 <div class="mb-3">
-                  <label for="name" class="form-label">Nombre del Hotel:</label>
-                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
+                    <label class="form-label" for="tourId">Tour:</label>
+                    <select class="form-select" id="tourId" name="tourId" required>
+                        <option value="" disabled selected>Seleccione un Tour</option>
+                        <% tours.forEach(tour => { %>
+                            <option value="<%= tour._id %>"><%= tour.id %></option>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="address" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
+                    <label class="form-label" for="customerId">Cliente (DNI):</label>
+                    <select class="form-select" id="customerId" name="customerId" required>
+                        <option value="" disabled selected>Seleccione un Cliente</option>
+                        <% customers.forEach(customer => { %>
+                            <option value="<%= customer._id %>"><%= customer.dni %> - <%= customer.full_name %></option>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="rating" class="form-label">Rating:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
+                    <label class="form-label" for="hotelId">Hotel:</label>
+                    <select class="form-select" id="hotelId" name="hotelId" required>
+                        <option value="" disabled selected>Seleccione un Hotel</option>
+                        <% hotels.forEach(hotel => { %>
+                            <option value="<%= hotel._id %>"><%= hotel.name %></option>
+                        <% }); %>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="price" class="form-label">Precio:</label>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
+                    <label class="form-label" for="price">Precio:</label>
+                    <input class="form-control" type="number" id="price" name="price" required>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-              </form>
+                <div class="row mb-3">
+                    <!-- Columna para Fecha de Inicio -->
+                    <div class="col-md-6">
+                        <label class="form-label" for="dateStart">Fecha de Inicio:</label>
+                        <input class="form-control" type="date" id="dateStart" name="dateStart" required>
+                    </div>
+                    <!-- Columna para Fecha de Fin -->
+                    <div class="col-md-6">
+                        <label class="form-label" for="dateEnd">Fecha de Fin:</label>
+                        <input class="form-control" type="date" id="dateEnd" name="dateEnd">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Reserva</button>
+            </form>
+            
 
             </div>
           </div>

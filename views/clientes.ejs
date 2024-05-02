@@ -101,33 +101,76 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Editar Hotel</h5>
-              <p class="mb-0">Actualiza la información del hotel en el sistema</p>
-              <br>
-              <form action="/actualizar-hotel" method="POST">
-                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
+              <h5 class="card-title fw-semibold mb-4">Clientes</h5>
+              <p class="mb-0">Clientes disponibles</p>
+              <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                  <a href="/nuevo-cliente" class="btn btn-success">Nuevo Cliente</a>
+                </ul>
+              </div>
+
+              <!doctype html>
+              <html lang="en">
+              
+              <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Turismo Perú</title>
+                <link rel="shortcut icon" type="image/png" href="/images/logos/favicon.png" />
+                <link rel="stylesheet" href="/css/styles.min.css" />
+              </head>
+              
+              <body>
+                <!--  Body Wrapper -->
+                <!-- Tu código HTML para la estructura de la página -->
+                <div class="table-responsive" data-simplebar>
+                  <table class="table text-nowrap align-middle table-custom mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-dark fw-normal ps-0">DNI</th>
+                        <th scope="col" class="text-dark fw-normal">Nombre Completo</th>
+                        <th scope="col" class="text-dark fw-normal">Tarjeta de Crédito</th>
+                        <th scope="col" class="text-dark fw-normal">Número de Teléfono</th>
+                        <th scope="col" class="text-dark fw-normal">Acciones</th>>
+
+                        <!-- Añade más encabezados si es necesario -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% customers.forEach(customer => { %>
+                      <tr>
+                        <td><%= customer.dni %></td>
+                        <td><%= customer.full_name %></td>
+                        <td><%= customer.credit_card %></td>
+                        <td><%= customer.phone_number %></td>
+                        <td>
+                            <form action="/eliminar-cliente" method="POST" class="d-inline">
+                              <input type="hidden" name="customerId" value="<%= customer._id %>">
+                              <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                            <form action="/editar-cliente/<%= customer._id %>" method="GET" class="d-inline">
+                              <button type="submit" class="btn btn-warning btn-sm">Editar</button>
+                            </form>
+                          </td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Fin de la tabla -->
                 
-                <div class="mb-3">
-                  <label for="name" class="form-label">Nombre del Hotel:</label>
-                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="rating" class="form-label">Rating:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Precio:</label>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Actualizar</button>
-              </form>
-
-            </div>
+                <!-- Scripts -->
+                <script src="/libs/jquery/dist/jquery.min.js"></script>
+                <script src="/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="/js/sidebarmenu.js"></script>
+                <script src="/js/app.min.js"></script>
+                <script src="/libs/simplebar/dist/simplebar.js"></script>
+                <!-- solar icons -->
+                <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+              </body>
+              
+              </html>
+              
           </div>
         </div>
       </div>

@@ -101,30 +101,46 @@
         <div class="container-fluid">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Editar Hotel</h5>
-              <p class="mb-0">Actualiza la información del hotel en el sistema</p>
+              <h5 class="card-title fw-semibold mb-4">Editar Vuelo</h5>
+              <p class="mb-0">Actualiza la información del vuelo en el sistema</p>
               <br>
-              <form action="/actualizar-hotel" method="POST">
-                <input type="hidden" name="hotelId" value="<%= hotel._id %>">
+              <form action="/actualizar-vuelo" method="POST">
+                <input type="hidden" name="vueloId" value="<%= vuelo._id %>">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Latitud de Origen:</label>
+                  <input type="number" class="form-control" id="origin_lat" name="origin_lat" step="0.000001" value="<%= vuelo.origin_lat %>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Longitud de Origen:</label>
+                  <input type="number" class="form-control" id="origin_lng" name="origin_lng" step="0.000001" value="<%= vuelo.origin_lng %>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Latitud de Destino:</label>
+                  <input type="number" class="form-control" id="destiny_lat" name="destiny_lat" step="0.000001" value="<%= vuelo.destiny_lat %>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Longitud de Destino:</label>
+                  <input type="number" class="form-control" id="destiny_lng" name="destiny_lng" step="0.000001" value="<%= vuelo.destiny_lng %>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="price" class="form-label">Precio:</label>
+                  <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= vuelo.price %>" required>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Origen:</label>
+                  <input type="text" class="form-control" id="origin_name" name="origin_name" required maxlength="50" value="<%= vuelo.origin_name %>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Destino:</label>
+                    <input type="text" class="form-control" id="destiny_name" name="destiny_name" required value="<%= vuelo.destiny_name %>"maxlength="50" required>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Aerolínea:</label>
+                  <input type="text" class="form-control" id="aero_line" name="aero_line" required maxlength="50" value="<%= vuelo.aero_line %>"required>
+                </div>
                 
-                <div class="mb-3">
-                  <label for="name" class="form-label">Nombre del Hotel:</label>
-                  <input type="text" class="form-control" id="name" name="name" required maxlength="50" value="<%= hotel.name %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="address" name="address" required maxlength="50" value="<%= hotel.address %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="rating" class="form-label">Rating:</label>
-                    <input type="number" class="form-control" id="rating" name="rating" required min="1" max="5" value="<%= hotel.rating %>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="price" class="form-label">Precio:</label>
-                    <input type="number" class="form-control" id="price" name="price" step="0.01" value="<%= hotel.price %>" required>
-                </div>
 
-                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
               </form>
 
             </div>
